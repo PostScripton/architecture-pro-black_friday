@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="Репликация" id="task1-replication">
+    <mxGraphModel dx="954" dy="674" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Вариант 2. Репликация (по 3 реплики на шард)" style="text;html=1;align=left;verticalAlign=middle;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="app" value="pymongo-api" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mongos" value="mongos_router" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="280" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="config" value="configSrv" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="280" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <!-- Группа репликации shard1 -->
+        <mxCell id="rs1" value="Группа репликации shard1 (replica set)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;verticalAlign=top;fillColor=none;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="80" width="320" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="shard1-1" value="shard1-1&#10;PRIMARY" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="rs1">
+          <mxGeometry x="120" y="40" width="80" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="shard1-2" value="shard1-2&#10;SECONDARY" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="rs1">
+          <mxGeometry x="20" y="130" width="80" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="shard1-3" value="shard1-3&#10;SECONDARY" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="rs1">
+          <mxGeometry x="220" y="130" width="80" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="r1a" value="репликация" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" parent="1" source="shard1-1" target="shard1-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r1b" value="репликация" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" parent="1" source="shard1-1" target="shard1-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Группа репликации shard2 -->
+        <mxCell id="rs2" value="Группа репликации shard2 (replica set)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;verticalAlign=top;fillColor=none;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="440" width="320" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="shard2-1" value="shard2-1&#10;PRIMARY" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="rs2">
+          <mxGeometry x="120" y="40" width="80" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="shard2-2" value="shard2-2&#10;SECONDARY" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="rs2">
+          <mxGeometry x="20" y="130" width="80" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="shard2-3" value="shard2-3&#10;SECONDARY" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="rs2">
+          <mxGeometry x="220" y="130" width="80" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="r2a" value="репликация" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" parent="1" source="shard2-1" target="shard2-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2b" value="репликация" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" parent="1" source="shard2-1" target="shard2-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Сетевые взаимодействия -->
+        <mxCell id="e1" value="запросы" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="app" target="mongos">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="метаданные кластера" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="mongos" target="config">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="mongos" target="shard1-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="mongos" target="shard2-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
